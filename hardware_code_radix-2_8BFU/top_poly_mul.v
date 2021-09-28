@@ -30,66 +30,56 @@ module top_poly_mul
     output wire [3:0] done_flag
     );
     
-    //fsm的端口信号
+    //fsm port signal
     wire [5:0] k;
     wire [5:0] i;
 	wire [3:0] p;
     wire sel;
     wire wen,ren,en,en_tf_rom;
     
-    //address_generator的端口信号
+    //address_generator port signal
     wire [9:0] old_address_0,old_address_1,old_address_2,old_address_3;
     wire [9:0] old_address_4,old_address_5,old_address_6,old_address_7;
     wire [9:0] old_address_8,old_address_9,old_address_10,old_address_11;
     wire [9:0] old_address_12,old_address_13,old_address_14,old_address_15;
     
-    //memory map的输出信号，map后的新地址
+    //memory map port signal
     wire [addr_width-1:0] b0,b1,b2,b3,b4,b5,b6,b7;
     wire [addr_width-1:0] b8,b9,b10,b11,b12,b13,b14,b15;
-    //memory map的输出信号，map后的bank_number
     wire [3:0] a0,a1,a2,a3,a4,a5,a6,a7;
     wire [3:0] a8,a9,a10,a11,a12,a13,a14,a15;
     
-    //control_bank_in_unit的输出信号，控制着后续的选择
     wire [3:0] sel_a_0,sel_a_1,sel_a_2,sel_a_3,sel_a_4,sel_a_5,sel_a_6,sel_a_7;
     wire [3:0] sel_a_8,sel_a_9,sel_a_10,sel_a_11,sel_a_12,sel_a_13,sel_a_14,sel_a_15;
-    
-    //输入给各个bank的写地址，需打拍数目等于蝶形运算加取点cycle数
+       
     wire [addr_width-1:0] new_address_0_reg,new_address_1_reg,new_address_2_reg,new_address_3_reg;
     wire [addr_width-1:0] new_address_4_reg,new_address_5_reg,new_address_6_reg,new_address_7_reg; 
     wire [addr_width-1:0] new_address_8_reg,new_address_9_reg,new_address_10_reg,new_address_11_reg;
     wire [addr_width-1:0] new_address_12_reg,new_address_13_reg,new_address_14_reg,new_address_15_reg; 
-         
-    //输入给各个bank的读地址
+
     wire [addr_width-1:0] new_address_0,new_address_1,new_address_2,new_address_3;
     wire [addr_width-1:0] new_address_4,new_address_5,new_address_6,new_address_7;
     wire [addr_width-1:0] new_address_8,new_address_9,new_address_10,new_address_11;
     wire [addr_width-1:0] new_address_12,new_address_13,new_address_14,new_address_15;
     
-    //从各个bank读出的数据
     wire [data_width-1:0] q0,q1,q2,q3,q4,q5,q6,q7;
     wire [data_width-1:0] q8,q9,q10,q11,q12,q13,q14,q15;
     
-    //输入给蝶形单元的数据
     wire [data_width-1:0] u0,v0,u1,v1,u2,v2,u3,v3;
     wire [data_width-1:0] u4,v4,u5,v5,u6,v6,u7,v7;
     
-    //蝶形单元的输出数据
     wire [data_width-1:0] bf_0_upper,bf_0_lower,bf_1_upper,bf_1_lower;
     wire [data_width-1:0] bf_2_upper,bf_2_lower,bf_3_upper,bf_3_lower;
     wire [data_width-1:0] bf_4_upper,bf_4_lower,bf_5_upper,bf_5_lower;
     wire [data_width-1:0] bf_6_upper,bf_6_lower,bf_7_upper,bf_7_lower;
     
-    //输入给各个bank的结果数据
     wire [data_width-1:0] d0,d1,d2,d3,d4,d5,d6,d7;
     wire [data_width-1:0] d8,d9,d10,d11,d12,d13,d14,d15;
    
-    //输入给各个bank的旋转因子
     wire [data_width-1:0] win0,win1,win2,win3;
     wire [data_width-1:0] win4,win5,win6,win7;
     wire [data_width*8-1:0] w;
     
-    //输入给各个ROM的旋转因子的地址
     wire [addr_rom_width-1:0] tf_address;
     
   shift_8 #(.data_width(6)) shf1 (.clk(clk),.rst(rst),.din(new_address_0),.dout(new_address_0_reg));   
@@ -229,7 +219,7 @@ module top_poly_mul
   (*DONT_TOUCH = "true"*)                                   
   data_bank bank_0(
                    .clk(clk),
-                   .A1(new_address_0_reg), //写地址
+	           .A1(new_address_0_reg), // write address
                    .A2(new_address_0),
                    .D(d0),
                    .WEN(wen),
