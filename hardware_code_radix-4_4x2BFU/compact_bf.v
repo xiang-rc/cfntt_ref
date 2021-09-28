@@ -4,8 +4,6 @@ module compact_bf #(parameter data_width = 14)(
         input [data_width-1:0] wa1,wa2,wa3,
         input sel,
         output [data_width-1:0] bf_0_upper,bf_0_lower,bf_1_upper,bf_1_lower
-        //bf_lower为大的数，赋给小的索引
-        //bf_upper为小的数，赋给大的索引
         );
         wire [data_width-1:0] PE0_in_up,PE0_in_low,PE0_out_up,PE0_out_low;
         wire [data_width-1:0] PE1_in_up,PE1_in_low,PE1_out_up,PE1_out_low;
