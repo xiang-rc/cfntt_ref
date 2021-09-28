@@ -1,7 +1,7 @@
 module address_generator(
     input [6:0] k,//max = 127
     input [6:0] i,//max = 127
-	input [3:0] p,//max = 9
+    input [3:0] p,//max = 9
     output wire [9:0] old_address_0,old_address_1,old_address_2,
     output wire [9:0] old_address_3,old_address_4,old_address_5,
     output wire [9:0] old_address_6,old_address_7);
