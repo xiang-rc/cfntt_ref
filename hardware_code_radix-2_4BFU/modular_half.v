@@ -1,4 +1,4 @@
-module modular_half #(parameter data_width = 256)(
+module modular_half #(parameter data_width = 14)(
     input [data_width-1:0] x_half,
     output [data_width-1:0] y_half
     );
