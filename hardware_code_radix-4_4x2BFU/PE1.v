@@ -25,8 +25,6 @@ module PE1 #(parameter data_width = 14)(
     input sel,
     input [data_width-1:0] u,v,
     output [data_width-1:0] bf_upper,bf_lower
-    //bf_lower为大的数，赋给小的索引
-    //bf_upper为小的数，赋给大的索引
     );
     
    wire [data_width-1:0] u_q3;
