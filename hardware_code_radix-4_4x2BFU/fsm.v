@@ -1,9 +1,3 @@
-//计数器嵌套，怎么书写更好；
-//采用两个模减模块，减少两个选择器；
-//新的地址映射方式，减少仲裁器、互联网络结构的复杂度；
-//怎么消去综合后的latch
-//Artix-7 k--->bank port logic delay = 1.594 net delay = 3.531
-
 module fsm (
   input clk,rst,
   input wire [2:0] conf,
@@ -30,7 +24,6 @@ module fsm (
   reg [6:0] k_reg,j_reg;
   reg [2:0] p_reg;
   reg [3:0] done_reg;
-  //wire [2:0] end_stage,begin_stage;
   wire [3:0] p_shift;
   wire [8:0] J;
   
@@ -39,14 +32,12 @@ module fsm (
   assign p = p_reg;
   assign done_flag = done_reg;
    
-  assign en = ((conf == DONE_NTT) || (conf == DONE_INTT)) ? en_reg_q : en_reg_q_tmp;//开始时与ren同时开始，结束时
-                                                                              //比ren晚结束；
- // assign en_tf_rom = en_reg_q_tmp;//结束时，立即结束
+  assign en = ((conf == DONE_NTT) || (conf == DONE_INTT)) ? en_reg_q : en_reg_q_tmp;
 
   shift_14 #(.data_width(1)) shif_wen(.clk(clk),.rst(rst),.din(wen_reg),.dout(wen));
   shift_13 #(.data_width(1)) shif_en(.clk(clk),.rst(rst),.din(en_reg_q_tmp),.dout(en_reg_q));
   
-  DFF #(.data_width(1)) dff_en(.clk(clk),.rst(rst),.d(en_reg),.q(en_reg_q_tmp));//en_reg也要打一拍
+  DFF #(.data_width(1)) dff_en(.clk(clk),.rst(rst),.d(en_reg),.q(en_reg_q_tmp));
   DFF #(.data_width(1)) dff_ren(.clk(clk),.rst(rst),.d(ren_reg),.q(ren));
   DFF #(.data_width(1)) dff_sel(.clk(clk),.rst(rst),.d(sel_reg),.q(sel));
   
@@ -99,7 +90,6 @@ module fsm (
          else begin
            done_reg = 4'b0; end
          end
-    //NTT 流水线排空状态
     DONE_NTT:begin 
          sel_reg = 0; //NTT = 0
          en_reg = 0;
@@ -123,9 +113,7 @@ module fsm (
      endcase
   end
  
- //assign end_stage = conf == NTT ? 0 : 4;
- //assign begin_stage = conf == NTT ? 4 : 0;
- //设置中间变量是有必要的，否则会出现问题
+
  assign p_shift = p_reg << 1;
  assign J = 1 << p_shift;
  
