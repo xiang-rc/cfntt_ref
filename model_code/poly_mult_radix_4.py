@@ -56,12 +56,6 @@ def DIT_NTT(a,omega):
         print("J = ",J)
         width_k = int(math.log(int(n/(4*J)),4))
         for k in range(int(n/(4*J))):
-            #wa1 = pow(omega,(2*bitreverse(k,width_k)+1)*J) % q
-            #warray1.append(wa1)
-            #wa2 = pow(omega,(2*bitreverse(k,width_k)+1)*2*J) % q
-            #warray2.append(wa2)
-            #wa3 = pow(omega,(2*bitreverse(k,width_k)+1)*3*J) % q
-            #warray3.append(wa3)
             wa1 = warray1[r]
             wa2 = warray2[r]
             wa3 = warray3[r]
@@ -75,9 +69,6 @@ def DIT_NTT(a,omega):
                 a[k*4*J+j+J] = (t1 + t3 * w4[1][1]) % q
                 a[k*4*J+j+2*J] = (t0 - t2) % q
                 a[k*4*J+j+3*J] = (t1 - t3 * w4[1][1]) % q 
-    #print("warray1 = ",warray1)
-    #print("warray2 = ",warray2)
-    #print("warray3 = ",warray3)
     return a
 
 def op21(a):
@@ -91,21 +82,11 @@ def op21(a):
 def DIF_INTT(a,omega):
     n = len(a)
     log_n = int(math.log(n,4))
-    #warray1 = []
-    #warray2 = []
-    #warray3 = []
     r = 340
     for i in range(log_n):
         J = int(pow(4,i))
         width_k = int(math.log(int(n/(4*J)),4))
         for k in range(int(n/(4*J))):
-            #wa1 = pow(omega,(2*bitreverse(k,width_k)+1)*J) % q
-            #warray1.append(wa1)
-            #wa2 = pow(omega,(2*bitreverse(k,width_k)+1)*2*J) % q
-            #warray2.append(wa2)
-            #wa3 = pow(omega,(2*bitreverse(k,width_k)+1)*3*J) % q
-            #warray3.append(wa3)
-            #print("r = ",r)
             wa1 = warray1[r]
             wa2 = warray2[r]
             wa3 = warray3[r]
@@ -119,9 +100,6 @@ def DIF_INTT(a,omega):
                 a[k*4*J+j+J] = (op21(t1 + t3) * wa1) % q
                 a[k*4*J+j+2*J] = (op21(t2 - t0) * wa2) % q
                 a[k*4*J+j+3*J] = (op21(t3 - t1) * wa3) % q
-    #print("warray1 = ",warray1)
-    #print("warray2 = ",warray2)
-    #print("warray3 = ",warray3)
     return a
 
 
