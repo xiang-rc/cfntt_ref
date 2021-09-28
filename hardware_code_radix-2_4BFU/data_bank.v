@@ -4,8 +4,8 @@ module data_bank
                  depth = 8'b10000000)
     (
     input clk,
-    input [addr_width-1:0] A1,//–¥µÿ÷∑
-    input [addr_width-1:0] A2,//∂¡µÿ÷∑
+    input [addr_width-1:0] A1,
+    input [addr_width-1:0] A2,
     input [data_width-1:0] D,
     input WEN,
     input REN,
