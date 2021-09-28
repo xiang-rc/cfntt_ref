@@ -52,16 +52,16 @@ module fsm (
   begin
     sel_reg = 0;
     en_reg = 0; 
-	wen_reg = 0;
+    wen_reg = 0;
     ren_reg = 0; 
-	done_reg = 4'b0;
+    done_reg = 4'b0;
     case(conf_state)
     IDLE:begin 
          sel_reg = 0;
          en_reg = 0; 
-		 wen_reg = 0;
+	 wen_reg = 0;
          ren_reg = 0; 
-		 done_reg = 4'b0;
+	 done_reg = 4'b0;
          end
     NTT:begin 
          sel_reg = 0;
