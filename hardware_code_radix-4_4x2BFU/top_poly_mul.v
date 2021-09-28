@@ -30,29 +30,28 @@ module top_poly_mul
     output [3:0] done_flag
     );
     
-    //fsm的端口信号
+    //fsm port signal
     wire sel;
     wire [6:0] k;
     wire [6:0] j;
     wire [2:0] p;
     wire wen,ren,en;
     
-    //address_generator的端口信号
+    //address_generator port signal
     wire [9:0] old_address_0,old_address_1,old_address_2,old_address_3;
     wire [9:0] old_address_4,old_address_5,old_address_6,old_address_7;
     
-    //memory map的输出信号
+    //memory map port signal
     wire [addr_width-1:0] new_address_0,new_address_1,new_address_2,new_address_3;
     wire [addr_width-1:0] new_address_4,new_address_5,new_address_6,new_address_7;
 
     wire [2:0] bank_number_0,bank_number_1,bank_number_2,bank_number_3;
     wire [2:0] bank_number_4,bank_number_5,bank_number_6,bank_number_7;
     
-    //arbiter的端口信号
+    //arbiter port signal
     wire [2:0] sel_a_0,sel_a_1,sel_a_2,sel_a_3;
     wire [2:0] sel_a_4,sel_a_5,sel_a_6,sel_a_7;
     
-    //输入给bank的地址，读地址和写地址，经过了第一轮排列
     wire [addr_width-1:0] bank_address_0,bank_address_1,bank_address_2,bank_address_3;
     wire [addr_width-1:0] bank_address_4,bank_address_5,bank_address_6,bank_address_7;
     wire [addr_width-1:0] bank_address_0_dy,bank_address_1_dy;
@@ -60,28 +59,22 @@ module top_poly_mul
     wire [addr_width-1:0] bank_address_4_dy,bank_address_5_dy;
     wire [addr_width-1:0] bank_address_6_dy,bank_address_7_dy;
     
-    
-    //从各个bank读出的数据
     wire [data_width-1:0] q0,q1,q2,q3;
     wire [data_width-1:0] q4,q5,q6,q7;
     
-    //输入给蝶形单元的数据
     wire [data_width-1:0] u0,v0,u1,v1;
     wire [data_width-1:0] u2,v2,u3,v3;
-    //蝶形单元的输出数据
+
     wire [data_width-1:0] bf_0_upper,bf_0_lower,bf_1_upper,bf_1_lower;
     wire [data_width-1:0] bf_2_upper,bf_2_lower,bf_3_upper,bf_3_lower;
 
-    //输入给各个bank的结果数据
     wire [data_width-1:0] d0,d1,d2,d3;
     wire [data_width-1:0] d4,d5,d6,d7;
    
-    //输入给各个bank的旋转因子
     wire [data_width*6-1:0] w;  
     wire [data_width-1:0] win1,win2,win3;
     wire [data_width-1:0] win4,win5,win6;
     
-    //输入给各个ROM的旋转因子的地址
     wire [addr_rom_width-1:0] tf_address;
   
    (*DONT_TOUCH = "true"*)
@@ -95,7 +88,6 @@ module top_poly_mul
       .wen(wen),
       .ren(ren),
       .en(en),
-      //.en_tf_rom(en_tf_rom),
       .done_flag(done_flag));  
       
   (*DONT_TOUCH = "true"*)
