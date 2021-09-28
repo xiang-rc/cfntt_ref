@@ -53,8 +53,6 @@ def DIT_NTT(a,omega):
     r = 0
     for i in range(log_n-1,-1,-1):
         J = int(pow(4,i))
-        print("J = ",J)
-        width_k = int(math.log(int(n/(4*J)),4))
         for k in range(int(n/(4*J))):
             wa1 = warray1[r]
             wa2 = warray2[r]
@@ -85,7 +83,6 @@ def DIF_INTT(a,omega):
     r = 340
     for i in range(log_n):
         J = int(pow(4,i))
-        width_k = int(math.log(int(n/(4*J)),4))
         for k in range(int(n/(4*J))):
             wa1 = warray1[r]
             wa2 = warray2[r]
