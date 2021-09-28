@@ -8,7 +8,6 @@ module fsm (
   output wire wen,
   output wire ren,
   output wire en,
-  //output wire en_tf_rom,
   output wire [3:0] done_flag);
   
   parameter IDLE = 3'b000;
@@ -20,7 +19,6 @@ module fsm (
 
   reg wen_reg,ren_reg,en_reg,sel_reg;
   wire en_reg_q;
-  //en_reg_q_tmp;
   reg [2:0] conf_state;
   reg [7:0] k_reg,i_reg;
   reg [3:0] p_reg;
@@ -34,8 +32,6 @@ module fsm (
   assign done_flag = done_reg;
    
   assign en = ((conf == DONE_NTT) || (conf == DONE_INTT)) ? en_reg_q : en_reg_q_tmp;
-  //assign en_tf_rom = en_reg_q_tmp;//结束时，立即结束
-  //assign ren = ren_reg;
 
   shift_8 #(.data_width(1)) shif_wen(.clk(clk),.rst(rst),.din(wen_reg),.dout(wen));
   shift_7 #(.data_width(1)) shif_en(.clk(clk),.rst(rst),.din(en_reg_q_tmp),.dout(en_reg_q));
@@ -93,7 +89,6 @@ module fsm (
          else begin
            done_reg = 4'b0; end
          end
-    //NTT 流水线排空状态
     DONE_NTT:begin 
          sel_reg = 0; //NTT = 0
          en_reg = 0;
@@ -130,7 +125,7 @@ module fsm (
          i_reg <= 0;
          k_reg <= 0;
      end
-     //NTT部分index产生, p = 9 -> 0, k = 0 -> 255 or 512/J-1, i = 0 -> J/2-1; 
+     // p = 9 -> 0, k = 0 -> 255 or 512/J-1, i = 0 -> J/2-1; 
      else if(conf_state == NTT)
      begin
         if(J >= 2)
@@ -163,7 +158,7 @@ module fsm (
                 k_reg <= k_reg + 1;
          end
      end
-     //PWM部分index产生, k = 0 -> 127 
+     //k = 0 -> 127 
      else if(conf_state == PWM)
      begin
          p_reg <= 0;
@@ -172,7 +167,7 @@ module fsm (
          else
             k_reg <= k_reg + 1;           
      end 
-     //INTT部分index产生, p = 0 -> 9, k = 0 -> 255 or 512/J-1, i = 0 -> J/2-1;
+     // p = 0 -> 9, k = 0 -> 255 or 512/J-1, i = 0 -> J/2-1;
      else if(conf_state == INTT)
      begin
           if(J >= 2)
@@ -206,7 +201,6 @@ module fsm (
           end  
      end
      else
-     //流水线排空阶段
      begin
        p_reg <= begin_stage;
        i_reg <= 0;
