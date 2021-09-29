@@ -19,39 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//这种写法只适用于信号变化速度很小(甚至不变)的情况，变化周期要小于延时周期数
-/*module shift_reg #(parameter data_width = 1, shift_width = 3, latency = 6)(
-    input [data_width-1:0] din,
-	input rst,clk,
-	output wire [data_width-1:0] dout
-	);
-	
-	reg [shift_width-1:0] d_shift;
-	reg [data_width-1:0] dout_tmp;
-	
-	always@(posedge clk or posedge rst)
-	begin
-	  if(rst)
-	  begin
-	    d_shift <= 0;
-		dout_tmp <= 0;
-	  end
-	  else
-	  begin
-	    if(d_shift == latency - 1)
-		begin
-	      d_shift <= 0;
-		  dout_tmp <= din;
-		end
-		else
-		  d_shift <= d_shift + 1'b1;
-      end		
-	end
-	
-	assign dout = dout_tmp;
-
-endmodule*/
-
 module DFF #(parameter data_width = 14)(
     input clk,rst,
     input [data_width-1:0] d,
