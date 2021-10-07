@@ -1,6 +1,6 @@
 # cfntt_ref
 ## Introduction
-This project is tailored for the paper entitled "CFNTT: Scalable Radix-2/4 NTT MultiplicationArchitecture with an Efficient Conflict-freeMemory Mapping Scheme". It is mainly organized as three parts:   
+This project is tailored for the paper entitled "CFNTT: Scalable Radix-2/4 NTT Multiplication Architecture with an Efficient Conflict-free Memory Mapping Scheme". It is mainly organized as three parts:   
 (1) Hardware codes for radix-2 and radix-4 NTT/INTT kernels written in Verilog HDL;    
 (2) Algorithmic models for radix-2 and radix-4 NTT/INTT  written in Python;   
 (3) Resource usages broken down across different modules tailored for radix-2 and radix-4 NTT kernels with different number of BFUs, which is reported by Vivado 2020.2 on Windows 10 using Xilinx Virtex-7 FPGA (xc7vx690tffg1761-3);   
